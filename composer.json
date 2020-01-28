@@ -1,5 +1,5 @@
 {
-  "name": "bank-statement-bundle",
+  "name": "bank-statement-parser-bundle",
   "type": "symfony-bundle",
   "license": "MIT",
   "authors": [
