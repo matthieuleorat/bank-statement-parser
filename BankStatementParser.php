@@ -18,6 +18,21 @@ class BankStatementParser
      */
     private $bankStatement;
 
+    /**
+     * @var string
+     */
+    private $dateBegin;
+
+    /**
+     * @var string
+     */
+    private $dateEnd;
+
+    /**
+     * @var string
+     */
+    private $accountNumber;
+
     public function __construct(PdfReader $pdfReader)
     {
         $this->pdfReader = $pdfReader;
@@ -40,6 +55,12 @@ class BankStatementParser
         $operations = $this->filterTransaction($bankStatementAsArray);
 
         $this->bankStatement->setOperations($operations);
+
+        $this->bankStatement->setMetaInformations(
+            $this->dateBegin,
+            $this->dateEnd,
+            $this->accountNumber
+        );
 
         $this->controlTotals();
 
@@ -79,6 +100,19 @@ class BankStatementParser
 
             if ($row == "") {
                 continue;
+            }
+
+            // Cherche le numéro de compte
+            preg_match('/\sn° (\d{5} \d{5} \d{11} \d{2})/u', $row, $matches);
+            if (count($matches)) {
+                $this->accountNumber = $matches[1];
+            }
+
+            // Cherche la date de début et la date de fin
+            preg_match('/VOS CONTACTS\s+du (\d{1,2}\/\d{1,2}\/\d{4}) au (\d{1,2}\/\d{1,2}\/\d{4})$/', $row, $matches);
+            if (count($matches)) {
+                $this->dateBegin = $matches[1];
+                $this->dateEnd = $matches[2];
             }
 
             // Cherche le début d'une page

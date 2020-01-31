@@ -26,6 +26,21 @@ final class BankStatement
      */
     private $credit;
 
+    /**
+     * @var string
+     */
+    private $accountNumber;
+
+    /**
+     * @var string
+     */
+    private $dateBegin;
+
+    /**
+     * @var string
+     */
+    private $dateEnd;
+
     private function __construct()
     {
     }
@@ -36,6 +51,13 @@ final class BankStatement
         $obj->filename = $filename;
 
         return $obj;
+    }
+
+    public function setMetaInformations(string $dateBegin, string $dateEnd, string $accountNumber)
+    {
+        $this->dateBegin = $dateBegin;
+        $this->dateEnd = $dateEnd;
+        $this->accountNumber = $accountNumber;
     }
 
     public function setTotals(float $credit, float $dedit) : void
@@ -75,6 +97,4 @@ final class BankStatement
     {
         return $this->credit;
     }
-
-
 }
