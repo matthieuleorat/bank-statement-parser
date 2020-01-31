@@ -1,23 +1,20 @@
 <?php
 
-declare(strict_types=1);
+namespace Matleo\BankStatementParserBundle;
 
-namespace BankStatementParser;
+use Matleo\BankStatementParserBundle\Model\BankStatement;
+use Matleo\BankStatementParserBundle\Model\Operation;
+use Matleo\BankStatementParserBundle\PdfReader;
 
-use BankStatementParser\Model\BankStatement;
-use BankStatementParser\Model\Operation;
-
-final class BankStatementParser
+class BankStatementParser
 {
-    private const PATH_TO_BANK_STATEMENT = '/var/www/html/public/';
-
     /**
      * @var PdfReader
      */
     private $pdfReader;
 
     /**
-     * BankStatement
+     * @var BankStatement
      */
     private $bankStatement;
 
@@ -27,17 +24,18 @@ final class BankStatementParser
     }
 
     /**
-     * @param string $fileToParse
+     * @param string $filename
+     * @param string $path
      *
      * @return BankStatement
      *
      * @throws \Exception
      */
-    public function execute(string $fileToParse = 'RCE_00057002074_20200108.pdf') : BankStatement
+    public function execute(string $filename, string $path) : BankStatement
     {
-        $this->bankStatement = BankStatement::create($fileToParse);
+        $this->bankStatement = BankStatement::create($filename);
 
-        $bankStatementAsArray = $this->pdfReader->execute(self::PATH_TO_BANK_STATEMENT.$fileToParse);
+        $bankStatementAsArray = $this->pdfReader->execute($path.$filename);
 
         $operations = $this->filterTransaction($bankStatementAsArray);
 
@@ -134,12 +132,12 @@ final class BankStatementParser
         return $operations;
     }
 
-    private static function formatAmount(string $amout) : float
+    private static function formatAmount(string $amount) : float
     {
         return (float) str_replace(
-            [' *','.',','],
-            ['','','.'],
-            $amout
+            [' *',  '.',    ','],
+            ['',    '',     '.'],
+            $amount
         );
     }
 

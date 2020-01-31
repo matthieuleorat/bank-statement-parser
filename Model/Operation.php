@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BankStatementParser\Model;
+namespace Matleo\BankStatementParserBundle\Model;
 
 class Operation
 {
@@ -29,7 +29,7 @@ class Operation
     /** @var string|null */
     private $details = null;
 
-    /** @var string|null */
+    /** @var float|null */
     private $montant = null;
 
     private $positionMontant = 0;
@@ -114,7 +114,7 @@ class Operation
         );
     }
 
-    private function setMontant()
+    private function setMontant() : void
     {
         preg_match(self::MONTANT_PATTERN, $this->content, $montants, PREG_OFFSET_CAPTURE);
         if (count($montants)) {
@@ -132,7 +132,7 @@ class Operation
         $this->montant = (float) $this->montant;
     }
 
-    private function setDetails()
+    private function setDetails() : void
     {
         $this->details = static::getValue(
             $this->content,
@@ -144,7 +144,7 @@ class Operation
     /**
      * @return string|null
      */
-    public function getDate(): ?string
+    public function getDate(): ? string
     {
         return $this->date;
     }
@@ -152,7 +152,7 @@ class Operation
     /**
      * @return string|null
      */
-    public function getValeur(): ?string
+    public function getValeur(): ? string
     {
         return $this->valeur;
     }
@@ -160,15 +160,15 @@ class Operation
     /**
      * @return string|null
      */
-    public function getDetails(): ?string
+    public function getDetails(): ? string
     {
         return $this->details;
     }
 
     /**
-     * @return string|null
+     * @return float|null
      */
-    public function getMontant(): ?string
+    public function getMontant(): ? float
     {
         return $this->montant;
     }

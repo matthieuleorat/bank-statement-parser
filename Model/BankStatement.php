@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BankStatementParser\Model;
+namespace Matleo\BankStatementParserBundle\Model;
 
 final class BankStatement
 {
