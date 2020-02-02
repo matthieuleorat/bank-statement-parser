@@ -33,6 +33,16 @@ class BankStatementParser
      */
     private $accountNumber;
 
+    /**
+     * @var float
+     */
+    private $soldePrecedent;
+
+    /**
+     * @var float
+     */
+    private $nouveauSolde;
+
     public function __construct(PdfReader $pdfReader)
     {
         $this->pdfReader = $pdfReader;
@@ -59,7 +69,9 @@ class BankStatementParser
         $this->bankStatement->setMetaInformations(
             $this->dateBegin,
             $this->dateEnd,
-            $this->accountNumber
+            $this->accountNumber,
+            $this->soldePrecedent,
+            $this->nouveauSolde
         );
 
         $this->controlTotals();
@@ -131,8 +143,9 @@ class BankStatementParser
             }
 
             // Cherche les soldes précédents
-            preg_match('/\sSOLDE PRÉCÉDENT AU \d{1,2}\/\d{1,2}\/\d{4}\s.*/', $row, $matches);
+            preg_match('/\s+SOLDE PRÉCÉDENT AU \d{1,2}\/\d{1,2}\/\d{4}\s+((\d{1,3}\.)?\d{1,3},\d{2})$/', $row, $matches);
             if (count($matches)) {
+                $this->soldePrecedent = static::formatAmount($matches[1]);
                 continue;
             }
 
@@ -145,6 +158,13 @@ class BankStatementParser
 
             // Cherche la fin de la dernière page
             if ($this->findEndOfStatementPattern($row)) {
+                continue;
+            }
+
+            // Cherche le nouveau solde à la fin du relevé
+            preg_match('/\s+NOUVEAU SOLDE AU \d{1,2}\/\d{1,2}\/\d{4}\s+(\+|-) ((\d{1,3}\.)?\d{1,3},\d{2})$/', $row, $matches);
+            if (count($matches)) {
+                $this->nouveauSolde = static::formatAmount($matches[2]);
                 break;
             }
 

@@ -41,6 +41,16 @@ final class BankStatement
      */
     private $dateEnd;
 
+    /**
+     * @var float
+     */
+    private $soldePrecedent;
+
+    /**
+     * @var float
+     */
+    private $nouveauSolde;
+
     private function __construct()
     {
     }
@@ -53,11 +63,13 @@ final class BankStatement
         return $obj;
     }
 
-    public function setMetaInformations(string $dateBegin, string $dateEnd, string $accountNumber)
+    public function setMetaInformations(string $dateBegin, string $dateEnd, string $accountNumber, float $soldePrecedent, float $nouveauSolde)
     {
         $this->dateBegin = $dateBegin;
         $this->dateEnd = $dateEnd;
         $this->accountNumber = $accountNumber;
+        $this->soldePrecedent = $soldePrecedent;
+        $this->nouveauSolde = $nouveauSolde;
     }
 
     public function setTotals(float $credit, float $dedit) : void
@@ -101,7 +113,7 @@ final class BankStatement
     /**
      * @return string
      */
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->filename;
     }
@@ -109,7 +121,7 @@ final class BankStatement
     /**
      * @return string
      */
-    public function getAccountNumber()
+    public function getAccountNumber(): string
     {
         return $this->accountNumber;
     }
@@ -117,7 +129,7 @@ final class BankStatement
     /**
      * @return string
      */
-    public function getDateBegin()
+    public function getDateBegin(): string
     {
         return $this->dateBegin;
     }
@@ -125,8 +137,24 @@ final class BankStatement
     /**
      * @return string
      */
-    public function getDateEnd()
+    public function getDateEnd(): string
     {
         return $this->dateEnd;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSoldePrecedent(): float
+    {
+        return $this->soldePrecedent;
+    }
+
+    /**
+     * @return float
+     */
+    public function getNouveauSolde(): float
+    {
+        return $this->nouveauSolde;
     }
 }
