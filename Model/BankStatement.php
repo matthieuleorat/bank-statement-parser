@@ -97,4 +97,36 @@ final class BankStatement
     {
         return $this->credit;
     }
+
+    /**
+     * @return string
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccountNumber()
+    {
+        return $this->accountNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateBegin()
+    {
+        return $this->dateBegin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateEnd()
+    {
+        return $this->dateEnd;
+    }
 }
