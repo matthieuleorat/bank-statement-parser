@@ -169,12 +169,11 @@ class BankStatementParser
             }
 
             if ($addTransaction === true) {
-
                 $operation = Operation::create($header, $row);
 
                 if ($operation->isComplementaryInformations() == true) {
                     $previousOperation = end($operations);
-                    $previousOperation->addDetails($operation->getDetails());
+                    $previousOperation->addDetails(trim($row));
                     continue;
                 }
 
