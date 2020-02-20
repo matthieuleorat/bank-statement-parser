@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Matleo\BankStatementParserBundle\Model;
 
@@ -14,6 +12,19 @@ class Operation
 
     private const MONTANT_PATTERN = '/((\d{1,3}\.)?\d{1,3},\d{2}( \*)?)$/';
     private const MONTANT_STARTING_POSITION = 22;
+
+    private const TYPE_CREDIT_CARD = 'credit_cart_payment';
+    private const TYPE_CREDIT_CARD_PATTERN = '/(CARTE )/';
+
+    private const TYPE_PERMANENT_BANK_TRANSFER = 'PERMANENT_BANK_TRANSFER';
+    private const TYPE_PERMANENT_BANK_TRANSFER_PATTERN = '/(VIR PERM)/';
+
+    private const TYPE_EUROPEAN_DEBIT = 'EUROPEAN_DEBIT';
+    private const TYPE_EUROPEAN_DEBIT_PATTERN = '/(PRELEVEMENT EUROPEEN )/';
+
+    private const TYPE_RECEVIED_BANK_TRANSFER = 'RECEVIED_BANK_TRANSFER';
+    private const TYPE_RECEVIED_BANK_TRANSFER_PATTERN = '/(VIR(EMENT)? RECU )/';
+
 
     /** @var string */
     private $content;
@@ -37,6 +48,10 @@ class Operation
      * @var false|int
      */
     private $creditPosition;
+    /**
+     * @var string
+     */
+    private $type;
 
     private function __construct()
     {
@@ -184,5 +199,11 @@ class Operation
         $value = trim($value);
 
         return $value;
+    }
+
+    public function guessType() : void
+    {
+        $this->type = OperationType::guess($this);
+        //dump($this->type);
     }
 }
