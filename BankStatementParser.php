@@ -171,10 +171,18 @@ class BankStatementParser
             if ($addTransaction === true) {
                 $operation = Operation::create($header, $row);
 
+                // Est ce qu'on doit ajouter des informations à l'operation précédente ?
                 if ($operation->isComplementaryInformations() == true) {
                     $previousOperation = end($operations);
                     $previousOperation->addDetails(trim($row));
                     continue;
+                }
+
+                // S'il s'agit d'une nouvelle transaction, on peut essayer de deviner le type de la précédente
+                if (!empty($operations)) {
+                    /** @var Operation $previousOperation */
+                    $previousOperation = end($operations);
+                    $previousOperation->guessType();
                 }
 
                 $operations[] = $operation;

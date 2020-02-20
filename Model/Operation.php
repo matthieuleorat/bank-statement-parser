@@ -201,8 +201,9 @@ class Operation
         return $value;
     }
 
-    public function setType(? string $type) : void
+    public function guessType() : void
     {
-        $this->type = $type;
+        $this->type = OperationType::guess($this);
+        //dump($this->type);
     }
 }
