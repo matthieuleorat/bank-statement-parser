@@ -5,7 +5,7 @@ namespace Matleo\BankStatementParserBundle\Model;
 class CreditCardPayment
 {
     const NAME = 'credit_card_payement';
-    const PATTERN = '/^CARTE\s{1}(X\d{4})\s{1}(\d{2}\/\d{2})\s{1}(.*)/';
+    const PATTERN = '/^CARTE\s{1}(X\d{4})\s{1}(\d{2}\/\d{2})\s{1}(.*)/s';
 
     /**
      * @var string

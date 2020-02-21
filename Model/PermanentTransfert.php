@@ -5,7 +5,7 @@ namespace Matleo\BankStatementParserBundle\Model;
 class PermanentTransfert
 {
     const NAME = 'permanent_transfert';
-    const PATTERN = '/^\d{6}\s{1}VIR\sPERM\nPOUR:\s(.*)\nREF:\s(\d*)\nMOTIF:\s(.*)\nLIB:\s(.*)$/';
+    const PATTERN = '/^\d{6}\s{1}VIR\sPERM\nPOUR:\s(.*)\nREF:\s(\d*)\nMOTIF:\s(.*)\nLIB:\s(.*)$/s';
 
     /**
      * @var string
