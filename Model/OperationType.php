@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Matleo\BankStatementParserBundle\Model;
 
@@ -7,6 +7,7 @@ class OperationType
     const PATTERNS = [
         CreditCardPayment::class,
         EuropeanDirectDebit::class,
+        PermanentTransfert::class,
     ];
 
     public static function guess(Operation $operation)
