@@ -5,7 +5,7 @@ namespace Matleo\BankStatementParserBundle\Model;
 class EuropeanDirectDebit
 {
     const NAME = 'european_direct_debit';
-    const PATTERN = '/^PRELEVEMENT EUROPEEN\s(\d*)\nDE:\s(.*)\nID:\s(.*)\nMOTIF:\s(.*)\nREF:\s(.*)\nwarrant (.*)$/s';
+    const PATTERN = '/^PRELEVEMENT EUROPEEN\s(\d*)\nDE:\s(.*)\nID:\s(.*)\nMOTIF:\s(.*)\nREF:\s(.*)\nMANDAT (.*)$/s';
 
     /**
      * @var string
@@ -25,7 +25,7 @@ class EuropeanDirectDebit
     /**
      * @var string
      */
-    private $motif;
+    private $reason;
 
     /**
      * @var string
