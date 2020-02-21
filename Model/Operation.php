@@ -204,6 +204,5 @@ class Operation
     public function guessType() : void
     {
         $this->type = OperationType::guess($this);
-        //dump($this->type);
     }
 }
