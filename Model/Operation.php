@@ -205,4 +205,9 @@ class Operation
     {
         $this->type = OperationType::guess($this);
     }
+
+    public function getType()
+    {
+        return $this->type;
+    }
 }
