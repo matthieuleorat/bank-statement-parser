@@ -34,4 +34,28 @@ class CreditCardPayment
 
         return $obj;
     }
+
+    /**
+     * @return string
+     */
+    public function getCardId(): string
+    {
+        return $this->cardId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate(): string
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchant(): string
+    {
+        return $this->merchant;
+    }
 }
