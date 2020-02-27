@@ -5,7 +5,7 @@ namespace Matleo\BankStatementParserBundle\Model;
 class PermanentTransfert
 {
     const NAME = 'permanent_transfert';
-    const PATTERN = '/^\d{6}\s{1}VIR\sPERM\nPOUR:\s(.*)\nREF:\s(\d*)\nMOTIF:\s(.*)\nLIB:\s(.*)$/s';
+    const PATTERN = '/^\d+\s{1}VIR\sPERM\nPOUR:\s(.*)\nREF:\s(\d*)\nMOTIF:\s(.*)\nLIB:\s(.*)$/s';
 
     /**
      * @var string
@@ -39,5 +39,37 @@ class PermanentTransfert
         $obj->label = $label;
 
         return $obj;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRecepient(): string
+    {
+        return $this->recepient;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReference(): string
+    {
+        return $this->reference;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReason(): string
+    {
+        return $this->reason;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
     }
 }
