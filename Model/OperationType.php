@@ -8,7 +8,8 @@ class OperationType
         CreditCardPayment::class,
         EuropeanDirectDebit::class,
         PermanentTransfert::class,
-        TransferReceived::class
+        TransferReceived::class,
+        TransferSended::class,
     ];
 
     public static function guess(Operation $operation)
