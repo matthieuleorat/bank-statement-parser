@@ -29,24 +29,39 @@ class TransferSended
 
     const PATTERN = '/^(\d+)\sVIR EUROPEEN EMIS LOGITEL'.self::FOR_SUB_PATTERN.'(\d{2} \d{2})\sSG\s(\d+)\sCPT\s(\d+)'.self::REF_SUB_PATTERN.''.self::REASON_SUB_PATTERN.''.self::TO_SUB_PATTERN.'/';
 
+    /**
+     * @var string
+     */
     private $number;
-
+    /**
+     * @var string
+     */
     private $for;
-
+    /**
+     * @var string
+     */
     private $date;
-
+    /**
+     * @var string
+     */
     private $account;
-
+    /**
+     * @var string
+     */
     private $ref;
-
+    /**
+     * @var string
+     */
     private $reason;
-
+    /**
+     * @var string
+     */
     private $to;
 
     private function __construct()
     {}
 
-    public static function create(array $matches)
+    public static function create(array $matches) : TransferSended
     {
         $obj = new self();
         $obj->number = $matches[1];
@@ -89,5 +104,61 @@ class TransferSended
         }
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNumber(): string
+    {
+        return $this->number;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFor(): string
+    {
+        return $this->for;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate(): string
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccount(): string
+    {
+        return $this->account;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRef(): string
+    {
+        return $this->ref;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReason(): string
+    {
+        return $this->reason;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTo(): string
+    {
+        return $this->to;
     }
 }
