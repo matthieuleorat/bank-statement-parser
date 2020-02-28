@@ -6,7 +6,7 @@ php:
 install: composer install --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
-  - phpunit tests --whitelist='./Model' --coverage-clover=coverage.clover
+  - phpunit tests --coverage-clover=coverage.clover
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
