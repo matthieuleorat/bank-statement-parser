@@ -130,7 +130,6 @@ class BankStatementParser
             // Cherche le début d'une page
             preg_match('/Date\s+Valeur\s+Nature de l\'opération/u', $row, $matches);
             if (count($matches)) {
-                $creditPosition = strpos($row, 'Crédit');
                 $header = $row;
                 $addTransaction = true;
                 continue;
@@ -172,7 +171,7 @@ class BankStatementParser
                 $operation = Operation::create($header, $row);
 
                 // Est ce qu'on doit ajouter des informations à l'operation précédente ?
-                if ($operation->isComplementaryInformations() == true) {
+                if ($operation->isComplementaryInformations() === true) {
                     $previousOperation = end($operations);
                     $previousOperation->addDetails(trim($row));
                     continue;
