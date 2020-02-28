@@ -33,7 +33,7 @@ final class PdfReader
         $tmpPath = $this->tmpPath.'/'. random_int(0, 10000).'.txt';
         $process = new Process(['/usr/bin/pdftotext','-layout' , $fileNameWithPath , $tmpPath]);
 
-        $process->run(static function($type, $buffer) {});
+        $process->run();
 
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
