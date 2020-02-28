@@ -19,6 +19,5 @@
     "phpunit/phpunit": "^8.0",
     "symfony/dependency-injection": "^4.4|^5.0",
     "symfony/phpunit-bridge": "^5.0"
-  },
-  "version": "0.0.1"
+  }
 }
