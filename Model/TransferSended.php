@@ -98,7 +98,7 @@ class TransferSended
     private function tryToGuess(string $pattern, array $matches) : ? string
     {
         foreach ($matches as $key => $value) {
-            if (substr($value, 0, strlen($pattern) ) === $pattern && array_key_exists($key + 1, $matches)) {
+            if (substr($value, 0, strlen($pattern)) === $pattern && array_key_exists($key + 1, $matches)) {
                 return trim($matches[$key + 1]);
             }
         }

@@ -95,7 +95,7 @@ class Operation
 
     public function addDetails(string $details) : void
     {
-        $this->details .= PHP_EOL . $details;
+        $this->details .= PHP_EOL.$details;
     }
 
     private function setDate() : void
@@ -127,9 +127,9 @@ class Operation
 
     private function formatMontant() : void
     {
-        $this->montant = str_replace(' *','', $this->montant);
-        $this->montant = str_replace('.','', $this->montant);
-        $this->montant = str_replace(',','.', $this->montant);
+        $this->montant = str_replace(' *', '', $this->montant);
+        $this->montant = str_replace('.', '', $this->montant);
+        $this->montant = str_replace(',', '.', $this->montant);
 
         $this->montant = (float) $this->montant;
     }

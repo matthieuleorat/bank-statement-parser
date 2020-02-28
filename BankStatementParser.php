@@ -94,11 +94,11 @@ class BankStatementParser
         }
 
         if ((string) $this->bankStatement->getDebit() != (string) $totalDebit) {
-            throw new \Exception("Debit: ". $this->bankStatement->getDebit() . " != ".$totalDebit);
+            throw new \Exception("Debit: ".$this->bankStatement->getDebit() . " != ".$totalDebit);
         }
 
         if ((string) $this->bankStatement->getCredit() != (string) $totalCredit) {
-            throw new \Exception("Credit: ". $this->bankStatement->getCredit() . " != ".$totalCredit);
+            throw new \Exception("Credit: ".$this->bankStatement->getCredit() . " != ".$totalCredit);
         }
     }
 
@@ -195,8 +195,8 @@ class BankStatementParser
     private static function formatAmount(string $amount) : float
     {
         return (float) str_replace(
-            [' *',  '.',    ','],
-            ['',    '',     '.'],
+            [' *', '.', ','],
+            ['', '', '.'],
             $amount
         );
     }

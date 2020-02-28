@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 final class TransferReceivedTest extends TestCase
 {
     const MODEL_1 = "VIR RECU 9936053227134".
-    "\nDE: MLLE GEGE RALDINE" .
+    "\nDE: MLLE GEGE RALDINE".
     "\nMOTIF: complement";
 
     const MODEL_2 = "VIREMENT RECU".
