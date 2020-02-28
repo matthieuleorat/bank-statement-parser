@@ -105,9 +105,9 @@ class BankStatementParser
     private function filterTransaction(array $rows) : array
     {
         $operations = [];
-
         $addTransaction = false;
-
+        $header = null;
+        
         foreach ($rows as $i => $row) {
 
             if ($row == "") {
