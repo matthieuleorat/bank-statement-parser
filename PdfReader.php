@@ -30,7 +30,7 @@ final class PdfReader
      */
     public function execute(string $fileNameWithPath) : array
     {
-        $tmpPath = $this->tmpPath.'/'. random_int(0, 10000).'.txt';
+        $tmpPath = $this->tmpPath.'/'.random_int(0, 10000).'.txt';
         $process = new Process(['/usr/bin/pdftotext', '-layout', $fileNameWithPath, $tmpPath]);
 
         $process->run();
