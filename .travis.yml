@@ -3,6 +3,8 @@ language: php
 php:
   - 7.2
 
+install: composer install --prefer-dist --no-interaction $COMPOSER_FLAGS
+
 script:
   - php bin/phpunit --coverage-clover=coverage.clover
 
