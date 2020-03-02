@@ -10,6 +10,7 @@ class OperationType
         PermanentTransfert::class,
         TransferReceived::class,
         TransferSended::class,
+        HomeLoan::class,
     ];
 
     public static function guess(Operation $operation)
