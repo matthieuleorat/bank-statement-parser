@@ -25,7 +25,7 @@
 
     <filter>
         <whitelist>
-            <directory>./src/</directory>
+            <directory>./Model/</directory>
         </whitelist>
     </filter>
 
