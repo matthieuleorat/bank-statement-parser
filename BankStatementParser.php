@@ -106,7 +106,7 @@ class BankStatementParser
     {
         $operations = [];
         $addTransaction = false;
-        $header = null;
+        $header = '';
         
         foreach ($rows as $i => $row) {
 
