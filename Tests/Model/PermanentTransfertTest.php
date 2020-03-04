@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Matleo\BankStatementParserBundle\tests\Model;
+namespace Matleo\BankStatementParser\tests\Model;
 
-use Matleo\BankStatementParserBundle\Model\PermanentTransfert;
+use Matleo\BankStatementParser\Model\PermanentTransfert;
 use PHPUnit\Framework\TestCase;
 
 final class PermanentTransfertTest extends TestCase

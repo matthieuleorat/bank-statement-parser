@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Matleo\BankStatementParserBundle\tests\Model;
+namespace Matleo\BankStatementParser\tests\Model;
 
-use Matleo\BankStatementParserBundle\Model\EuropeanDirectDebit;
+use Matleo\BankStatementParser\Model\EuropeanDirectDebit;
 use PHPUnit\Framework\TestCase;
 
 final class EuropeanDirectDebitTest extends TestCase

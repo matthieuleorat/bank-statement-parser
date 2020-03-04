@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Matleo\BankStatementParserBundle\Tests\Model;
+namespace Matleo\BankStatementParser\Tests\Model;
 
-use Matleo\BankStatementParserBundle\Model\HomeLoan;
+use Matleo\BankStatementParser\Model\HomeLoan;
 use PHPUnit\Framework\TestCase;
 
 class HomeLoanTest extends TestCase

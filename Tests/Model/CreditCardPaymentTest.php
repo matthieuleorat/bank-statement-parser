@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Matleo\BankStatementParserBundle\tests\Model;
+namespace Matleo\BankStatementParser\tests\Model;
 
-use Matleo\BankStatementParserBundle\Model\CreditCardPayment;
+use Matleo\BankStatementParser\Model\CreditCardPayment;
 use PHPUnit\Framework\TestCase;
 
 final class CreditCardPaymentTest extends TestCase

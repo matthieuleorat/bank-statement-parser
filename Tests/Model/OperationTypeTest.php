@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Matleo\BankStatementParserBundle\tests\Model;
+namespace Matleo\BankStatementParser\tests\Model;
 
-use Matleo\BankStatementParserBundle\Model\CreditCardPayment;
-use Matleo\BankStatementParserBundle\Model\EuropeanDirectDebit;
-use Matleo\BankStatementParserBundle\Model\Operation;
-use Matleo\BankStatementParserBundle\Model\OperationType;
-use Matleo\BankStatementParserBundle\Model\PermanentTransfert;
-use Matleo\BankStatementParserBundle\Model\TransferReceived;
-use Matleo\BankStatementParserBundle\Model\TransferSended;
+use Matleo\BankStatementParser\Model\CreditCardPayment;
+use Matleo\BankStatementParser\Model\EuropeanDirectDebit;
+use Matleo\BankStatementParser\Model\Operation;
+use Matleo\BankStatementParser\Model\OperationType;
+use Matleo\BankStatementParser\Model\PermanentTransfert;
+use Matleo\BankStatementParser\Model\TransferReceived;
+use Matleo\BankStatementParser\Model\TransferSended;
 use PHPUnit\Framework\TestCase;
 
 final class OperationTypeTest extends TestCase

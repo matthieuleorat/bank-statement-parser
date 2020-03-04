@@ -1,6 +1,6 @@
 <?php  declare(strict_types=1);
 
-namespace Matleo\BankStatementParserBundle\Model;
+namespace Matleo\BankStatementParser\Model;
 
 class EuropeanDirectDebit
 {

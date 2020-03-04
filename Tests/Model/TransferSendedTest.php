@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Matleo\BankStatementParserBundle\tests\Model;
+namespace Matleo\BankStatementParser\tests\Model;
 
-use Matleo\BankStatementParserBundle\Model\TransferSended;
+use Matleo\BankStatementParser\Model\TransferSended;
 use PHPUnit\Framework\TestCase;
 
 class TransferSendedTest extends TestCase

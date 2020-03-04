@@ -1,10 +1,10 @@
 <?php
 
-namespace Matleo\BankStatementParserBundle;
+namespace Matleo\BankStatementParser;
 
-use Matleo\BankStatementParserBundle\Model\BankStatement;
-use Matleo\BankStatementParserBundle\Model\Operation;
-use Matleo\BankStatementParserBundle\PdfReader;
+use Matleo\BankStatementParser\Model\BankStatement;
+use Matleo\BankStatementParser\Model\Operation;
+use Matleo\BankStatementParser\PdfReader;
 
 class BankStatementParser
 {

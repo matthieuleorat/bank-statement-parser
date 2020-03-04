@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Matleo\BankStatementParserBundle;
+namespace Matleo\BankStatementParser;
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
