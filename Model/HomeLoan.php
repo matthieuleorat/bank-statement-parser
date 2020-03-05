@@ -2,7 +2,7 @@
 
 namespace Matleo\BankStatementParser\Model;
 
-class HomeLoan
+class HomeLoan extends AbstractType
 {
     const NAME = 'home_loan';
 
@@ -56,53 +56,17 @@ class HomeLoan
     private function __construct()
     {}
 
-    public static function create(array $matches) : self
+    public static function create(array $matches) : TypeInterface
     {
         $obj = new self();
         $obj->loanNumber = $matches[2];
-        $obj->setDepreciatedCapital($matches);
-        $obj->setInterest($matches);
-        $obj->setInsurance($matches);
-        $obj->setRemainingCapital($matches);
-        $obj->setExpectedEndDate($matches);
+        $obj->depreciatedCapital = $obj->tryToGuess(self::DEPRECIATED_CAPITAL_KEY, $matches);
+        $obj->interest = $obj->tryToGuess(self::INTEREST_KEY, $matches);
+        $obj->insurance = $obj->tryToGuess(self::INSURANCE_KEY, $matches);
+        $obj->remainingCapital = $obj->tryToGuess(self::REMAINING_CAPITAL_KEY, $matches);
+        $obj->expectedEndDate = $obj->tryToGuess(self::EXPECTED_END_DATE_KEY, $matches);
 
         return $obj;
-    }
-
-    private function setDepreciatedCapital(array $matches) : void
-    {
-        $this->depreciatedCapital = $this->tryToGuess(self::DEPRECIATED_CAPITAL_KEY, $matches);
-    }
-
-    private function setInterest(array $matches) : void
-    {
-        $this->interest = $this->tryToGuess(self::INTEREST_KEY, $matches);
-    }
-
-    private function setInsurance(array $matches) : void
-    {
-        $this->insurance = $this->tryToGuess(self::INSURANCE_KEY, $matches);
-    }
-
-    private function setRemainingCapital(array $matches) : void
-    {
-        $this->remainingCapital = $this->tryToGuess(self::REMAINING_CAPITAL_KEY, $matches);
-    }
-
-    private function setExpectedEndDate(array $matches) : void
-    {
-        $this->expectedEndDate = $this->tryToGuess(self::EXPECTED_END_DATE_KEY, $matches);
-    }
-
-    private function tryToGuess(string $pattern, array $matches) : ? string
-    {
-        foreach ($matches as $key => $value) {
-            if (substr($value, 0, strlen($pattern)) === $pattern && array_key_exists($key + 1, $matches)) {
-                return $matches[$key + 1];
-            }
-        }
-
-        return null;
     }
 
     /**

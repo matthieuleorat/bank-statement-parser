@@ -2,7 +2,7 @@
 
 namespace Matleo\BankStatementParser\Model;
 
-class EuropeanDirectDebit
+class EuropeanDirectDebit extends AbstractType
 {
     const NAME = 'european_direct_debit';
     const PATTERN = '/^PRELEVEMENT EUROPEEN\s(\d*)\nDE:\s(.*)\nID:\s(.*)\nMOTIF:\s(.*)\nREF:\s(.*)\nMANDAT (.*)$/s';
@@ -39,7 +39,7 @@ class EuropeanDirectDebit
 
     private function __construct() {}
 
-    public static function create(array $matches) : self
+    public static function create(array $matches) : TypeInterface
     {
         list (, $number, $from, $id, $reason, $ref, $warrant) = $matches;
         $obj = new self();

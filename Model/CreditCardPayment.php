@@ -2,7 +2,7 @@
 
 namespace Matleo\BankStatementParser\Model;
 
-class CreditCardPayment
+class CreditCardPayment extends AbstractType
 {
     const NAME = 'credit_card_payement';
     const PATTERN = '/^CARTE\s{1}(X\d{4})\s{1}(\d{2}\/\d{2})\s{1}(.*)/s';
@@ -24,7 +24,7 @@ class CreditCardPayment
 
     private function __construct() {}
 
-    public static function create(array $matches) : CreditCardPayment
+    public static function create(array $matches) : TypeInterface
     {
         list (, $cardId, $date, $merchant) = $matches;
         $obj = new self();

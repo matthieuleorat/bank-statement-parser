@@ -2,7 +2,7 @@
 
 namespace Matleo\BankStatementParser\Model;
 
-class TransferSended
+class TransferSended extends AbstractType
 {
     /**
     "000001 VIR EUROPEEN EMIS LOGITEL
@@ -61,49 +61,18 @@ class TransferSended
     private function __construct()
     {}
 
-    public static function create(array $matches) : TransferSended
+    public static function create(array $matches) : TypeInterface
     {
         $obj = new self();
         $obj->number = $matches[1];
         $obj->date = $matches[4];
         $obj->account = $matches[6];
-        $obj->tryToSetFor($matches);
-        $obj->tryToSetReason($matches);
-        $obj->tryToSetTo($matches);
-        $obj->tryToSetRef($matches);
+        $obj->for = $obj->tryToGuess(self::FOR_KEY, $matches);
+        $obj->ref = $obj->tryToGuess(self::REF_KEY, $matches);
+        $obj->to = $obj->tryToGuess(self::TO_KEY, $matches);
+        $obj->reason = $obj->tryToGuess(self::REASON_KEY, $matches);
 
         return $obj;
-    }
-
-    private function tryToSetFor(array $matches) : void
-    {
-        $this->for = $this->tryToGuess(self::FOR_KEY, $matches);
-    }
-
-    private function tryToSetRef(array $matches) : void
-    {
-        $this->ref = $this->tryToGuess(self::REF_KEY, $matches);
-    }
-
-    private function tryToSetTo(array $matches) : void
-    {
-        $this->to = $this->tryToGuess(self::TO_KEY, $matches);
-    }
-
-    private function tryToSetReason(array $matches) : void
-    {
-        $this->reason = $this->tryToGuess(self::REASON_KEY, $matches);
-    }
-
-    private function tryToGuess(string $pattern, array $matches) : ? string
-    {
-        foreach ($matches as $key => $value) {
-            if (substr($value, 0, strlen($pattern)) === $pattern && array_key_exists($key + 1, $matches)) {
-                return trim($matches[$key + 1]);
-            }
-        }
-
-        return null;
     }
 
     /**

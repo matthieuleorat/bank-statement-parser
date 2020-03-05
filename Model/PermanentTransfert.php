@@ -2,7 +2,7 @@
 
 namespace Matleo\BankStatementParser\Model;
 
-class PermanentTransfert
+class PermanentTransfert extends AbstractType
 {
     const NAME = 'permanent_transfert';
     const PATTERN = '/^\d+\s{1}VIR\sPERM\nPOUR:\s(.*)\nREF:\s(\d*)\nMOTIF:\s(.*)\nLIB:\s(.*)$/s';
@@ -29,7 +29,7 @@ class PermanentTransfert
 
     private function __construct() {}
 
-    public static function create(array $matches) : self
+    public static function create(array $matches) : TypeInterface
     {
         list (, $recepient, $reference, $reason, $label) = $matches;
         $obj = new self();

@@ -2,7 +2,7 @@
 
 namespace Matleo\BankStatementParser\Model;
 
-class TransferReceived
+class TransferReceived extends AbstractType
 {
     const REF_SUB_PATTERN = "\nREF: ";
     const ID_SUB_PATTERN = "\nID: ";
@@ -37,42 +37,16 @@ class TransferReceived
 
     private function __construct() {}
 
-    public static function create(array $matches) : self
+    public static function create(array $matches) : TypeInterface
     {
         $obj = new self();
         $obj->number = $matches[1];
         $obj->from = $matches[2];
-        $obj->tryToSetReason($matches);
-        $obj->tryToSetRef($matches);
-        $obj->tryToSetId($matches);
+        $obj->reason = $obj->tryToGuess(self::REASON_SUB_PATTERN, $matches);
+        $obj->ref = $obj->tryToGuess(self::REF_SUB_PATTERN, $matches);
+        $obj->id = $obj->tryToGuess(self::ID_SUB_PATTERN, $matches);
 
         return $obj;
-    }
-
-    private function tryToSetReason(array $matches) : void
-    {
-        $this->reason = $this->tryToGuess(self::REASON_SUB_PATTERN, $matches);
-    }
-
-    private function tryToSetRef(array $matches) : void
-    {
-        $this->ref = $this->tryToGuess(self::REF_SUB_PATTERN, $matches);
-    }
-
-    private function tryToSetId(array $matches) : void
-    {
-        $this->id = $this->tryToGuess(self::ID_SUB_PATTERN, $matches);
-    }
-
-    private function tryToGuess(string $pattern, array $matches) : ? string
-    {
-        foreach ($matches as $key => $value) {
-            if (substr($value, 0, strlen($pattern)) === $pattern && array_key_exists($key + 1, $matches)) {
-                return $matches[$key + 1];
-            }
-        }
-
-        return null;
     }
 
     /**
