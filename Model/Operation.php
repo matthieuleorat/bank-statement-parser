@@ -36,7 +36,7 @@ class Operation
      */
     private $creditPosition;
     /**
-     * @var string
+     * @var TypeInterface
      */
     private $type;
 
@@ -193,7 +193,7 @@ class Operation
         $this->type = OperationType::guess($this);
     }
 
-    public function getType()
+    public function getType() : TypeInterface
     {
         return $this->type;
     }

@@ -12,7 +12,7 @@ final class BankStatement
     private $filename;
 
     /**
-     * @var array
+     * @var Operation[]
      */
     private $operations;
 
