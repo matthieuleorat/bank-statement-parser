@@ -5,7 +5,7 @@ namespace Matleo\BankStatementParser\tests\Model;
 use Matleo\BankStatementParser\Model\CreditCardPayment;
 use Matleo\BankStatementParser\Model\EuropeanDirectDebit;
 use Matleo\BankStatementParser\Model\Operation;
-use Matleo\BankStatementParser\Model\OperationType;
+use Matleo\BankStatementParser\Model\OperationTypeGuesser;
 use Matleo\BankStatementParser\Model\PermanentTransfert;
 use Matleo\BankStatementParser\Model\TransferReceived;
 use Matleo\BankStatementParser\Model\TransferSended;
@@ -19,7 +19,7 @@ final class OperationTypeTest extends TestCase
         $mockOperationCreditCard->method('getDetails')
             ->willReturn(CreditCardPaymentTest::MODEL_1);
 
-        $type = OperationType::guess($mockOperationCreditCard);
+        $type = OperationTypeGuesser::execute($mockOperationCreditCard);
         $this->assertInstanceOf(CreditCardPayment::class, $type);
     }
 
@@ -29,7 +29,7 @@ final class OperationTypeTest extends TestCase
         $mockOperationCreditCard->method('getDetails')
             ->willReturn(EuropeanDirectDebitTest::MODEL_1);
 
-        $type = OperationType::guess($mockOperationCreditCard);
+        $type = OperationTypeGuesser::execute($mockOperationCreditCard);
         $this->assertInstanceOf(EuropeanDirectDebit::class, $type);
     }
 
@@ -39,7 +39,7 @@ final class OperationTypeTest extends TestCase
         $mockOperationCreditCard->method('getDetails')
             ->willReturn(PermanentTransfertTest::MODEL_1);
 
-        $type = OperationType::guess($mockOperationCreditCard);
+        $type = OperationTypeGuesser::execute($mockOperationCreditCard);
         $this->assertInstanceOf(PermanentTransfert::class, $type);
     }
 
@@ -49,7 +49,7 @@ final class OperationTypeTest extends TestCase
         $mockOperationCreditCard->method('getDetails')
             ->willReturn(TransferReceivedTest::MODEL_1);
 
-        $type = OperationType::guess($mockOperationCreditCard);
+        $type = OperationTypeGuesser::execute($mockOperationCreditCard);
         $this->assertInstanceOf(TransferReceived::class, $type);
     }
 
@@ -59,7 +59,7 @@ final class OperationTypeTest extends TestCase
         $mockOperationCreditCard->method('getDetails')
             ->willReturn(TransferSendedTest::MODEL_1);
 
-        $type = OperationType::guess($mockOperationCreditCard);
+        $type = OperationTypeGuesser::execute($mockOperationCreditCard);
         $this->assertInstanceOf(TransferSended::class, $type);
     }
 
@@ -69,7 +69,7 @@ final class OperationTypeTest extends TestCase
         $mockOperationCreditCard->method('getDetails')
             ->willReturn('unmatched operation');
 
-        $type = OperationType::guess($mockOperationCreditCard);
+        $type = OperationTypeGuesser::execute($mockOperationCreditCard);
         $this->assertNull($type);
     }
 }

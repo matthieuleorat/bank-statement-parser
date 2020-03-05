@@ -190,7 +190,7 @@ class Operation
 
     public function guessType() : void
     {
-        $this->type = OperationType::guess($this);
+        $this->type = OperationTypeGuesser::execute($this);
     }
 
     public function getType() : TypeInterface

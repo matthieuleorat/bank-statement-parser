@@ -2,12 +2,12 @@
 
 namespace Matleo\BankStatementParser\Model;
 
-class OperationType
+class OperationTypeGuesser
 {
     /**
      * @var TypeInterface[]
      */
-    const PATTERNS = [
+    const OPERATION_TYPES = [
         CreditCardPayment::class,
         EuropeanDirectDebit::class,
         PermanentTransfert::class,
@@ -16,9 +16,9 @@ class OperationType
         HomeLoan::class,
     ];
 
-    public static function guess(Operation $operation) : ? TypeInterface
+    public static function execute(Operation $operation) : ? TypeInterface
     {
-        foreach (self::PATTERNS as $type) {
+        foreach (self::OPERATION_TYPES as $type) {
             $obj = $type::createFromString($operation->getDetails());
             if ($obj instanceof TypeInterface) {
                 return $obj;
