@@ -189,6 +189,9 @@ class BankStatementParser
             }
         }
 
+        $lastOperation = end($operations);
+        $lastOperation->guessType();
+
         return $operations;
     }
 
