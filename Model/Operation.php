@@ -36,7 +36,7 @@ class Operation
      */
     private $creditPosition;
     /**
-     * @var TypeInterface
+     * @var TypeInterface|null
      */
     private $type;
 
@@ -193,7 +193,7 @@ class Operation
         $this->type = OperationTypeGuesser::execute($this);
     }
 
-    public function getType() : TypeInterface
+    public function getType() : ? TypeInterface
     {
         return $this->type;
     }
