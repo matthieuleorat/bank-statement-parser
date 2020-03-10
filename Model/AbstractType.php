@@ -16,6 +16,11 @@ abstract class AbstractType implements TypeInterface
         return null;
     }
 
+    public static function createFormOperation(Operation $operation) : ? TypeInterface
+    {
+        return static::createFromString($operation->getDetails());
+    }
+
     protected function tryToGuess(string $pattern, array $matches) : ? string
     {
         foreach ($matches as $key => $value) {

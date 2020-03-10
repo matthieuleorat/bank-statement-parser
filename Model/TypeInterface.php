@@ -12,6 +12,13 @@ interface TypeInterface
     public static function createFromString(string $data) : ? TypeInterface;
 
     /**
+     * @param Operation $operation
+     *
+     * @return TypeInterface|null
+     */
+    public static function createFormOperation(Operation $operation) : ? TypeInterface;
+
+    /**
      * @param array $matches
      *
      * @return TypeInterface

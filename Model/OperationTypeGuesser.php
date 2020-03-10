@@ -19,7 +19,7 @@ class OperationTypeGuesser
     public static function execute(Operation $operation) : ? TypeInterface
     {
         foreach (self::OPERATION_TYPES as $type) {
-            $obj = $type::createFromString($operation->getDetails());
+            $obj = $type::createFormOperation($operation);
             if ($obj instanceof TypeInterface) {
                 return $obj;
             }
