@@ -18,10 +18,10 @@ class Operation
 
     private $header;
 
-    /** @var string|null */
+    /** @var \DateTimeImmutable|null */
     private $date = null;
 
-    /** @var string|null */
+    /** @var \DateTimeImmutable|null */
     private $valeur = null;
 
     /** @var string|null */
@@ -100,20 +100,28 @@ class Operation
 
     private function setDate() : void
     {
-        $this->date = static::getValue(
+        $date = static::getValue(
             $this->content,
             self::DATE_STARTING_POSITION,
             self::DATE_LENGTH
         );
+
+        if (false === empty($date)) {
+            $this->date = (\DateTimeImmutable::createFromFormat('d/m/Y', $date))->setTime(0,0,0);
+        }
     }
 
     private function setValeur() : void
     {
-        $this->valeur = static::getValue(
+        $valeur = static::getValue(
             $this->content,
             self::VALEUR_STARTING_POSITION,
             self::VALEUR_LENGTH
         );
+
+        if (false === empty($valeur)) {
+            $this->valeur = (\DateTimeImmutable::createFromFormat('d/m/Y', $valeur))->setTime(0, 0, 0);
+        }
     }
 
     private function setMontant() : void
@@ -144,17 +152,17 @@ class Operation
     }
 
     /**
-     * @return string|null
+     * @return \DateTimeImmutable|null
      */
-    public function getDate(): ? string
+    public function getDate(): ? \DateTimeImmutable
     {
         return $this->date;
     }
 
     /**
-     * @return string|null
+     * @return \DateTimeImmutable|null
      */
-    public function getValeur(): ? string
+    public function getValeur(): ? \DateTimeImmutable
     {
         return $this->valeur;
     }
