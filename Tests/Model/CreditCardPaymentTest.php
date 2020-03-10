@@ -3,41 +3,58 @@
 namespace Matleo\BankStatementParser\tests\Model;
 
 use Matleo\BankStatementParser\Model\CreditCardPayment;
+use Matleo\BankStatementParser\Model\Operation;
+use Matleo\BankStatementParser\Model\TypeInterface;
 use PHPUnit\Framework\TestCase;
 
 final class CreditCardPaymentTest extends TestCase
 {
-    const MODEL_1 = "CARTE X0964 22/12 TRALALA";
-
-    const MODEL_2 = "CARTE X0964 30/12 TROLOLO".
-        "\nRA419338";
-
     public function testModel1()
     {
-        $object = $this->createObject(self::MODEL_1);
-        $this->assertEquals('22/12', $object->getDate());
+        $operation = $this->getOperationModel1();
+        $object = $this->createObject($operation);
+
         $this->assertEquals("TRALALA", $object->getMerchant());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $object->getDate());
         $this->assertEquals('X0964', $object->getCardId());
     }
 
     public function testModel2()
     {
-        $object = $this->createObject(self::MODEL_2);
-        $this->assertEquals('30/12', $object->getDate());
+        $operation = $this->getOperationModel2();
+        $object = $this->createObject($operation);
+        $this->assertInstanceOf(\DateTimeImmutable::class, $object->getDate());
         $this->assertEquals("TROLOLO\nRA419338", $object->getMerchant());
         $this->assertEquals('X0964', $object->getCardId());
     }
 
-    private function createObject(string $details) : CreditCardPayment
+    private function createObject(Operation $operation) : TypeInterface
     {
-        preg_match(CreditCardPayment::PATTERN, $details, $matches);
+        $obj = CreditCardPayment::createFormOperation($operation);
 
-        $obj = CreditCardPayment::create($matches);
+        $this->assertInstanceOf(CreditCardPayment::class, $obj);
 
-        $this->assertInstanceOf(
-            CreditCardPayment::class,
-            $obj
-        );
+        return $obj;
+    }
+
+    private function getOperationModel1()
+    {
+        $header = "      Date         Valeur                                  Nature de l'opération                                               Débit                     Crédit";
+        $row = " 09/12/2019 09/12/2019 CARTE X0964 08/12 TRALALA                                                                                        5,00";
+
+        return Operation::create($header, $row);
+    }
+
+
+    private function getOperationModel2()
+    {
+        $header = "      Date         Valeur                                  Nature de l'opération                                               Débit                     Crédit";
+        $row = " 09/12/2019 09/12/2019 CARTE X0964 07/12 TROLOLO                                                                                        5,00";
+
+        $obj = Operation::create($header, $row);
+
+        $additionnalRow = "RA419338";
+        $obj->addDetails($additionnalRow);
 
         return $obj;
     }

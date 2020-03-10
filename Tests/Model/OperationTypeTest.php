@@ -19,6 +19,9 @@ final class OperationTypeTest extends TestCase
         $mockOperationCreditCard->method('getDetails')
             ->willReturn(CreditCardPaymentTest::MODEL_1);
 
+        $mockOperationCreditCard->method('getDate')
+            ->willReturn(new \DateTimeImmutable('now'));
+
         $type = OperationTypeGuesser::execute($mockOperationCreditCard);
         $this->assertInstanceOf(CreditCardPayment::class, $type);
     }
