@@ -2,6 +2,8 @@
 
 namespace Matleo\BankStatementParser\Model;
 
+use Symfony\Component\Translation\Catalogue\OperationInterface;
+
 class CreditCardPayment extends AbstractType
 {
     const NAME = 'credit_card_payement';
@@ -13,7 +15,7 @@ class CreditCardPayment extends AbstractType
     private $cardId;
 
     /**
-     * @var string
+     * @var \DateTimeImmutable
      */
     private $date;
 
@@ -35,6 +37,18 @@ class CreditCardPayment extends AbstractType
         return $obj;
     }
 
+    public static function createFormOperation(Operation $operation) : ? TypeInterface
+    {
+        $obj = parent::createFormOperation($operation);
+
+        if ($obj instanceof OperationInterface) {
+            $year = $operation->getDate()->format('Y');
+            $obj->date = (\DateTimeImmutable::createFromFormat('d/m/Y', $obj->date.'/'.$year));
+        }
+
+        return $obj;
+    }
+
     /**
      * @return string
      */
@@ -44,9 +58,9 @@ class CreditCardPayment extends AbstractType
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable
      */
-    public function getDate(): string
+    public function getDate(): \DateTimeImmutable
     {
         return $this->date;
     }
