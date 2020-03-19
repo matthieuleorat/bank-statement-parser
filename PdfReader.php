@@ -16,9 +16,15 @@ final class PdfReader
      */
     private $tmpPath;
 
-    public function __construct()
+    /**
+     * @var string
+     */
+    private $pdttotextBinrayPath;
+
+    public function __construct(string $pdttotextBinrayPath = "/usr/bin/pdftotext")
     {
         $this->tmpPath = sys_get_temp_dir();
+        $this->pdttotextBinrayPath = $pdttotextBinrayPath;
     }
 
     /**
@@ -31,7 +37,7 @@ final class PdfReader
     public function execute(string $fileNameWithPath) : array
     {
         $tmpPath = $this->tmpPath.'/'.random_int(0, 10000).'.txt';
-        $process = new Process(['/usr/bin/pdftotext', '-layout', $fileNameWithPath, $tmpPath]);
+        $process = new Process([$this->pdttotextBinrayPath, '-layout', $fileNameWithPath, $tmpPath]);
 
         $process->run();
 
