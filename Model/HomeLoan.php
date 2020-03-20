@@ -2,6 +2,8 @@
 
 namespace Matleo\BankStatementParser\Model;
 
+use Matleo\BankStatementParser\AmoutFormatter;
+
 class HomeLoan extends AbstractType
 {
     const NAME = 'home_loan';
@@ -33,19 +35,19 @@ class HomeLoan extends AbstractType
      */
     private $loanNumber;
     /**
-     * @var string
+     * @var float
      */
     private $depreciatedCapital;
     /**
-     * @var string
+     * @var float
      */
     private $interest;
     /**
-     * @var string
+     * @var float
      */
     private $insurance;
     /**
-     * @var string
+     * @var float
      */
     private $remainingCapital;
     /**
@@ -60,10 +62,10 @@ class HomeLoan extends AbstractType
     {
         $obj = new self();
         $obj->loanNumber = $matches[2];
-        $obj->depreciatedCapital = $obj->tryToGuess(self::DEPRECIATED_CAPITAL_KEY, $matches);
-        $obj->interest = $obj->tryToGuess(self::INTEREST_KEY, $matches);
-        $obj->insurance = $obj->tryToGuess(self::INSURANCE_KEY, $matches);
-        $obj->remainingCapital = $obj->tryToGuess(self::REMAINING_CAPITAL_KEY, $matches);
+        $obj->depreciatedCapital = AmoutFormatter::formatFloat($obj->tryToGuess(self::DEPRECIATED_CAPITAL_KEY, $matches));
+        $obj->interest = AmoutFormatter::formatFloat($obj->tryToGuess(self::INTEREST_KEY, $matches));
+        $obj->insurance = AmoutFormatter::formatFloat($obj->tryToGuess(self::INSURANCE_KEY, $matches));
+        $obj->remainingCapital = AmoutFormatter::formatFloat($obj->tryToGuess(self::REMAINING_CAPITAL_KEY, $matches));
         $obj->expectedEndDate = $obj->tryToGuess(self::EXPECTED_END_DATE_KEY, $matches);
 
         return $obj;
@@ -78,33 +80,33 @@ class HomeLoan extends AbstractType
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getDepreciatedCapital(): string
+    public function getDepreciatedCapital(): float
     {
         return $this->depreciatedCapital;
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getInterest(): string
+    public function getInterest(): float
     {
         return $this->interest;
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getInsurance(): string
+    public function getInsurance(): float
     {
         return $this->insurance;
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getRemainingCapital(): string
+    public function getRemainingCapital(): float
     {
         return $this->remainingCapital;
     }

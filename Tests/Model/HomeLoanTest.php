@@ -18,10 +18,10 @@ class HomeLoanTest extends TestCase
     {
         $object = $this->createObject(self::MODEL_1);
         $this->assertEquals('817104468917', $object->getLoanNumber());
-        $this->assertEquals('870,28', $object->getDepreciatedCapital());
-        $this->assertEquals('174,67', $object->getInterest());
-        $this->assertEquals('29,71', $object->getInsurance());
-        $this->assertEquals('173 798,59', $object->getRemainingCapital());
+        $this->assertEquals(870.28, $object->getDepreciatedCapital());
+        $this->assertEquals(174.67, $object->getInterest());
+        $this->assertEquals(29.71, $object->getInsurance());
+        $this->assertEquals(173798.59, $object->getRemainingCapital());
         $this->assertEquals('07/03/2035', $object->getExpectedEndDate());
     }
 

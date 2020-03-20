@@ -2,6 +2,8 @@
 
 namespace Matleo\BankStatementParser\Model;
 
+use Matleo\BankStatementParser\AmoutFormatter;
+
 class Operation
 {
     private const DATE_STARTING_POSITION = 0;
@@ -129,17 +131,8 @@ class Operation
         preg_match(self::MONTANT_PATTERN, $this->content, $montants, PREG_OFFSET_CAPTURE);
         if (count($montants)) {
             [$this->montant, $this->positionMontant] = $montants[0];
-            $this->formatMontant();
+            $this->montant = AmoutFormatter::formatFloat($this->montant);
         }
-    }
-
-    private function formatMontant() : void
-    {
-        $this->montant = str_replace(' *', '', $this->montant);
-        $this->montant = str_replace('.', '', $this->montant);
-        $this->montant = str_replace(',', '.', $this->montant);
-
-        $this->montant = (float) $this->montant;
     }
 
     private function setDetails() : void

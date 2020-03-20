@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Matleo\BankStatementParser\tests\Model;
+namespace Matleo\BankStatementParser\Tests\Model;
 
 use Matleo\BankStatementParser\Model\CreditCardPayment;
 use Matleo\BankStatementParser\Model\EuropeanDirectDebit;
@@ -17,12 +17,13 @@ final class OperationTypeTest extends TestCase
     {
         $mockOperationCreditCard = $this->createMock(Operation::class);
         $mockOperationCreditCard->method('getDetails')
-            ->willReturn(CreditCardPaymentTest::MODEL_1);
+            ->willReturn("CARTE X0964 08/12 TRALALA");
 
         $mockOperationCreditCard->method('getDate')
             ->willReturn(new \DateTimeImmutable('now'));
 
         $type = OperationTypeGuesser::execute($mockOperationCreditCard);
+
         $this->assertInstanceOf(CreditCardPayment::class, $type);
     }
 
