@@ -50,7 +50,7 @@ class TransferSended extends AbstractType
      */
     private $ref;
     /**
-     * @var string
+     * @var string|null
      */
     private $reason;
     /**
@@ -116,9 +116,9 @@ class TransferSended extends AbstractType
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReason(): string
+    public function getReason(): ? string
     {
         return $this->reason;
     }
