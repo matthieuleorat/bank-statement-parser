@@ -5,7 +5,23 @@ namespace Matleo\BankStatementParser\Model;
 class EuropeanDirectDebit extends AbstractType
 {
     const NAME = 'european_direct_debit';
-    const PATTERN = '/^PRELEVEMENT EUROPEEN\s(\d*)\nDE:\s(.*)\nID:\s(.*)\nMOTIF:\s(.*)\nREF:\s(.*)\nMANDAT (.*)$/s';
+
+    const FROM_KEY = "\nDE:\s";
+    const FROM_SUB_PATTERN = "".self::FROM_KEY."(.*)";
+
+    const ID_KEY = "\nID:\s";
+    const ID_SUB_PATTERN = "".self::ID_KEY."(.*)";
+
+    const REASON_KEY = "\nMOTIF:\s";
+    const REASON_SUB_PATTERN = "(?:".self::REASON_KEY."(.*))?";
+
+    const REF_KEY = "\nREF:\s";
+    const REF_SUB_PATTERN = "".self::REF_KEY."(.*)";
+
+    const WARRANT_KEY = "\nMANDAT\s";
+    const WARRANT_SUB_PATTERN = "".self::WARRANT_KEY."(.*)";
+
+    const PATTERN = "/^PRELEVEMENT EUROPEEN\s(\d*)".self::FROM_SUB_PATTERN."".self::ID_SUB_PATTERN."".self::REASON_SUB_PATTERN."".self::REF_SUB_PATTERN."".self::WARRANT_SUB_PATTERN."$/sU";
 
     /**
      * @var string
